@@ -3,7 +3,7 @@
 <body> 
 
 <?php 
-echo "Hello World!"; 
+echo "Welcome to WeiXin World!"; 
 ?> 
 
 </body> 
