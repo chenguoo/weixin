@@ -237,7 +237,7 @@ class WechatCallbackapiTest
     $x=$postObj->Location_X;
     $y=$postObj->Location_Y;
     $label=$postObj->Label;
-    $str = "你发送的是地理位置消息,维度:{$x}经度:{$x}地理位置信息:{$label}";
+    $str = "你发送的是地理位置消息,维度:{$x}经度:{$y}地理位置信息:{$label}";
     return $this->responseTextOther($toUsername,$fromUsername,$str);
   }
 }
