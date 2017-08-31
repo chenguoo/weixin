@@ -1,11 +1,13 @@
-<!DOCTYPE html> 
-<html> 
-<body> 
+<?php
+include './functions.php';
+include './Controller.php';
+include './WeChatController.php';
 
-<?php 
-echo "Welcome to WeiXin World!"; 
-?> 
+$wechatObj = new WeChatController();
 
-</body> 
-</html>
+$fun = isset($_GET['fun']) ? $_GET['fun'] : 'index';
+
+$wechatObj->$fun();
+
+?>
 

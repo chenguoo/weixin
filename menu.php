@@ -3,7 +3,7 @@
 //1.初始化curl句柄
 $ch = curl_init();
 //2.设置curl
-$access_token="idSuks1bVd8ar5DZRVwu4KwDH9JgnCbaquy35EbBG4J2ZwdHgpFKqjj0lb_5JzZ39ZY2b0tcUDAEbRapxN9CDxMAJ1jaPJUiaeclfjl79wsTJXhAIAGWK";
+$access_token="_GNg6BzNhBE8XRwsKvVcImFW_IK9s8xpS-9Mp-HKPOUlUEDNkx1Wr-8pXgw92FCPKynLzb83oBPYikbQpCUkIFnbzvIdAy83bY9l08Hf9EWJBcMAarObnD8LFNoNoDl1JSDdAJATCN";
 
 $url="https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$access_token;
 curl_setopt($ch,CURLOPT_URL,$url);
@@ -20,14 +20,14 @@ $data =  '{
     {
       "name":"菜单",
       "sub_button":[
-        { 
+        {
            "type":"view",
            "name":"搜索",
            "url":"http://www.soso.com/"
         },
         {
            "type":"click",
-           "name":"赞一下我们",
+           "name":"赞一下我们0",
            "key":"V1001_GOOD"
         }
       ]
@@ -35,20 +35,18 @@ $data =  '{
   ]
 }';
 curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
-//curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
-//curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
+curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
 //3.执行curl
-$output = curl_exec($ch);
+$output = curl_multi_getcontent($ch);
 if($output === false){
-  //echo curl_error($ch);
+  echo curl_error($ch);
   echo "出错了";
 }else {
   echo $output;
 }
+//echo $output;
 //4.关闭curl
 curl_close($ch);
-
-
-
 
 ?>
