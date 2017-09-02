@@ -1,0 +1,32 @@
+{
+    "button": [
+    {
+        "type": "click",
+        "name": "布优新闻",
+        "key": "byxw"
+    },
+    {
+        "type": "click",
+        "name": "求红包",
+        "key": "qhb"
+    },
+    {
+        "name": "菜单栏",
+        "sub_button": [
+        {
+            "type": "view",
+            "name": "布优网",
+            "url": "http:\/\/www.buuyou.com"
+        },
+        {
+            "type": "view",
+            "name": "百度一下",
+            "url": "http:\/\/www.baidu.com"
+        },
+        {
+            "type": "click",
+            "name": "公司地址",
+            "key": "address"
+        }]
+    }]
+}

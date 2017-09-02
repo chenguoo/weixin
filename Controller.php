@@ -21,8 +21,15 @@ class Controller {
 	 * @return file       缓存文件
 	 */
 	private function getFile($name) {
-		return $this->dir . '/' . md5($name) . 'php';
+		return $this->dir . '/' . md5($name) . '.php';
 	}
+	/**
+	 * 设置缓存
+	 * @param  String  $name   文件名
+	 * @param  String  $data    缓存数据
+	 * @param  integer $expire 缓存时间
+	 * @return [type]          [description]
+	 */
 	public function cacheSet($name, $data, $expire = 3600) {
 		$file = $this->getFile($name);
 		//缓存时间
@@ -49,7 +56,8 @@ class Controller {
 		$mtime = filemtime($file);
 		//缓存失效处理
 		if ($expire > 0 && $mtime + $expire < time()) {
-			return @unlink($file);
+			@unlink($file); //删除文件
+			return false;
 		}
 
 		return unserialize(substr($content, 18, -3));
@@ -57,7 +65,7 @@ class Controller {
 	/**
 	 * 模拟GET请求
 	 * @param  String $url 请求地址
-	 * @return Object      返回结果对象
+	 * @return String      返回结果字符串
 	 */
 	public function curlGet($url) {
 		//1.初始化curl句柄
@@ -70,7 +78,8 @@ class Controller {
 		//3.执行
 		if (!curl_exec($ch)) {
 			$data = '';
-			//echo curl_error($ch);
+			writeLog("wechat.log", "curl_get:" . curl_error($ch));
+			echo curl_error($ch);
 		} else {
 			//获取数据
 			$data = curl_multi_getcontent($ch);
@@ -90,7 +99,7 @@ class Controller {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 		//3.执行
 		if (!curl_exec($ch)) {
 			$data = '';
